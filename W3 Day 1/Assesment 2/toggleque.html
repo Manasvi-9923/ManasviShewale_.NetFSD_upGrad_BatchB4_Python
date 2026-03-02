@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Toggle Section</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .faq-container {
+            width: 60%;
+            margin: 30px auto;
+        }
+
+        .question {
+            background-color: #f2f2f2;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .answer {
+            display: none;
+            padding: 10px;
+            background-color: #e6e6e6;
+        }
+
+        .active {
+            background-color: #d4edda;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <h2>Website FAQs</h2>
+
+        <div class="faq">
+            <div class="question">1. How can I create an account?</div>
+            <div class="answer">
+                Click on the Sign Up button and fill in your basic details like name, email, and password.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">2. How do I reset my password?</div>
+            <div class="answer">
+                Click on "Forgot Password" on the login page and follow the instructions sent to your email.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">3. Is my personal data secure?</div>
+            <div class="answer">
+                Yes, we use secure encryption methods to protect your personal information.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">4. Can I update my profile details?</div>
+            <div class="answer">
+                Yes, go to your dashboard and click on Edit Profile to update your information.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">5. How can I contact customer support?</div>
+            <div class="answer">
+                You can contact support through the Contact Us page or by emailing support@example.com.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $(".question").click(function(){
+
+                $(this).next(".answer").slideToggle();
+
+                $(this).toggleClass("active");
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

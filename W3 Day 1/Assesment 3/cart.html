@@ -1,0 +1,95 @@
+<!-- Problem 3 (Level-2): Product List with Add to Cart Counter
+Scenario:
+An e-commerce website wants to display a list of products. When users click 'Add to Cart', the cart counter at the top should increase dynamically.
+Requirements
+* Display at least 4 products with 'Add to Cart' buttons.
+* Use jQuery to handle button click events.
+* Increase the cart counter dynamically without page refresh.
+* Disable the button once the product is added.
+* Display a small confirmation message beside the product.
+
+️ Technical Constraints
+* Use jQuery event delegation if needed.
+* Use .text(), .attr(), and .prop() methods.
+* No backend or database integration.
+
+Expectations:
+* Efficient event handling.
+* Proper use of jQuery methods for attribute manipulation.
+* Clean UI updates.
+ 
+Learning Outcome
+* Understand advanced DOM manipulation.
+* Use jQuery methods for dynamic content updates.
+* Apply event delegation concepts. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List - Add to Cart</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>🛒 Cart Items: <span id="cartCount">0</span></h2>
+
+    <div id="productList">
+
+        <div class="product">
+            <h3>Product 1</h3>
+            <button class="addBtn" data-id="1">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+
+        <div class="product">
+            <h3>Product 2</h3>
+            <button class="addBtn" data-id="2">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+
+        <div class="product">
+            <h3>Product 3</h3>
+            <button class="addBtn" data-id="3">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+
+        <div class="product">
+            <h3>Product 4</h3>
+            <button class="addBtn" data-id="4">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+
+    </div>
+
+<script>
+$(document).ready(function(){
+
+    let count = 0;
+
+    // Event Delegation
+    $("#productList").on("click", ".addBtn", function(){
+
+        count++;
+
+        // Update cart counter using .text()
+        $("#cartCount").text(count);
+
+        // Disable button using .prop()
+        $(this).prop("disabled", true);
+
+        // Change button text using .text()
+        $(this).text("Added");
+
+        // Add attribute using .attr()
+        $(this).attr("title", "Product already added");
+
+        // Show confirmation message
+        $(this).siblings(".message")
+               .text(" ✔ Added to cart!")
+               .css("color", "green");
+    });
+
+});
+</script>
+
+</body>
+</html>

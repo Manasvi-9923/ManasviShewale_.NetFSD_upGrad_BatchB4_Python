@@ -1,0 +1,1 @@
+ can you test a function that throws error ?devide error create on function to devide a/b

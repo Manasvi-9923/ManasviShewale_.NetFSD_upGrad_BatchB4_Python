@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theme Toggle</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 40px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .light {
+      background-color: white;
+      color: #b52626;
+    }
+
+    .dark {
+      background-color: #b52626;
+      color: white;
+    }
+
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Theme Toggle</h1>
+  <button id="btn">Switch Theme</button>
+
+  <script>
+    const btn = document.getElementById("btn");//select the button element
+
+    // check saved theme when page loads
+    let savedTheme = localStorage.getItem("theme");
+    //if the theme is saved then apply class to body else apply light theme
+    if(savedTheme) {
+      document.body.className = savedTheme;
+    } else {
+      document.body.className = "light";
+    }
+
+    btn.addEventListener("click", function() {
+
+      if(document.body.className === "light") {
+        document.body.className = "dark";
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.body.className = "light";
+        localStorage.setItem("theme", "light");
+      }
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Users</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>User List</h2>
+<button id="btn">Fetch Users</button>
+<div id="result"></div>
+<script>
+$("#btn").click(function(){
+
+    $.ajax({
+        url: "https://jsonplaceholder.typicode.com/users",
+        type: "GET",
+        success: function(data){
+            for(let i = 0; i < data.length; i++){
+                $("#result").append(
+                    "<p>" + data[i].name + " - " + data[i].email + "</p>"
+                );
+            }
+        },
+    });
+
+});
+
+</script>
+
+</body>
+</html>

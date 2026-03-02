@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promises Example</title>
+</html>
+<body>
+  <h1>Promises Example</h1>
+  <div id="output"></div>
+
+  <script>
+    // Create a new Promise
+    const myPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const success = true; // Change to false to test rejection
+        if (success) {
+          resolve("Promise resolved successfully!");
+        } else {
+          reject("Promise rejected.");
+        }
+      }, 2000);
+    });
+
+    // Handle the Promise
+    myPromise
+      .then(result => {
+        document.getElementById('output').textContent = result;
+      })
+      .catch(error => {
+        document.getElementById('output').textContent = error;
+      });
+  </script>

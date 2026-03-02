@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>for of example</title>
+</head>
+<body>
+  <h1>for of example</h1>
+  <div id="output"></div>
+
+  <!-- <script>
+    const myArray = ['apple', 'banana', 'cherry'];
+    let output = '';
+
+    for (const item of myArray) {
+      output += item + ' ';
+    }
+
+    document.getElementById('output').textContent = output.trim();
+  </script> -->
+  <script>
+    let person={
+      name:"Manasvi",
+      age:20,
+      city:"pune"
+    }
+    for(let key in person){
+      console.log(key,person[key])
+    }
+  </script>
+</html>

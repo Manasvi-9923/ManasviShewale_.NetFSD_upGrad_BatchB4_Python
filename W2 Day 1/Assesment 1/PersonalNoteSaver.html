@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes Saver</title>
+</head>
+<body>
+
+<h2>My Notes</h2>
+
+<textarea id="note" rows="5" cols="30"></textarea>
+<br><br>
+
+<button onclick="saveNote()">Save</button>
+<button onclick="clearNote()">Clear</button>
+
+<script>
+    window.onload = function() {
+        var data = localStorage.getItem("noteKey");
+        if (data != null) {
+            document.getElementById("note").value = data;
+        }
+    }
+
+    // Save function
+    function saveNote() {
+        var text = document.getElementById("note").value;
+        localStorage.setItem("noteKey", text);
+        alert("Saved");
+    }
+
+    // Clear function
+    function clearNote() {
+        localStorage.removeItem("noteKey");
+        document.getElementById("note").value = "";
+        alert("Cleared");
+    }
+
+</script>
+
+</body>
+</html>

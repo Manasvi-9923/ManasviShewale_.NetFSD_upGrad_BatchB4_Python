@@ -1,0 +1,151 @@
+<!-- Problem 4 (Level-2): Interactive To-Do List Application
+Scenario:
+A productivity web app requires a dynamic To-Do List where users can add, mark as complete, and remove tasks using jQuery.
+
+Requirements
+* Provide an input field and Add button to insert tasks.
+* Display tasks dynamically in a list.
+* Allow users to mark tasks as completed (strike-through effect).
+* Provide a delete button for each task.
+* Display total task count and completed task count dynamically.
+
+️ Technical Constraints
+* Use jQuery for all DOM manipulation and event handling.
+* Use append(), remove(), toggleClass(), and on() methods.
+* No external libraries except jQuery.
+ 
+Expectations:
+* Proper dynamic element handling.
+* Efficient event binding for dynamically created elements.
+* Responsive and interactive UI behavior.
+
+Learning Outcome
+* Master jQuery DOM manipulation.
+* Implement dynamic event handling.
+* Build a small interactive application using jQuery -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive To-Do List</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: 30px auto;
+        }
+
+        input {
+            padding: 8px;
+            width: 65%;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            margin-top: 5px;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+        }
+
+        .counts {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>To-Do List App</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter new task">
+    <button id="addBtn">Add</button>
+
+    <ul id="taskList"></ul>
+
+    <div class="counts">
+        Total Tasks: <span id="totalCount">0</span> |
+        Completed: <span id="completedCount">0</span>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    function updateCounts(){
+        let total = $("#taskList li").length;
+        let completed = $("#taskList li.completed").length;
+
+        $("#totalCount").text(total);
+        $("#completedCount").text(completed);
+    }
+
+    // Add Task
+    $("#addBtn").click(function(){
+
+        let taskText = $("#taskInput").val().trim();
+
+        if(taskText !== ""){
+
+            $("#taskList").append(
+                "<li>" + taskText + 
+                " <button class='delete-btn'>Delete</button></li>"
+            );
+
+            $("#taskInput").val("");
+            updateCounts();
+        }
+    });
+
+    // Mark as Complete (Event Delegation)
+    $("#taskList").on("click", "li", function(e){
+
+        if(!$(e.target).hasClass("delete-btn")){
+            $(this).toggleClass("completed");
+            updateCounts();
+        }
+    });
+
+    // Delete Task (Event Delegation)
+    $("#taskList").on("click", ".delete-btn", function(){
+
+        $(this).parent().remove();
+        updateCounts();
+    });
+
+});
+</script>
+
+</body>
+</html>

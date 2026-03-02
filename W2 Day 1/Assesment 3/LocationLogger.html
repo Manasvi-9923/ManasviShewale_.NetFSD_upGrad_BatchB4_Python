@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Logger</title>
+</head>
+<body>
+
+<h2>My Location</h2>
+
+<button onclick="getLocation()">Get My Location</button>
+
+<p id="result"></p>
+
+<h3>History</h3>
+<ul id="history"></ul>
+
+<script>
+
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function success(position) {
+
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+
+    document.getElementById("result").innerHTML =
+        "Latitude: " + lat + "<br>Longitude: " + lon;
+
+    var data = localStorage.getItem("locations");
+
+    if (data == null) {
+        data = [];
+    } else {
+        data = JSON.parse(data);
+    }
+
+    data.push({ latitude: lat, longitude: lon });
+
+    if (data.length > 5) {
+        data.shift();   // remove oldest
+    }
+
+    localStorage.setItem("locations", JSON.stringify(data));
+
+    showHistory();
+}
+
+function error(err) {
+
+    if (err.code == 1) {
+        document.getElementById("result").innerHTML = "Permission Denied";
+    }
+    else if (err.code == 2) {
+        document.getElementById("result").innerHTML = "Location Unavailable";
+    }
+    else {
+        document.getElementById("result").innerHTML = "Timeout";
+    }
+}
+
+function showHistory() {
+
+    var list = document.getElementById("history");
+    list.innerHTML = "";
+
+    var data = localStorage.getItem("locations");
+
+    if (data != null) {
+
+        data = JSON.parse(data);
+
+        for (var i = 0; i < data.length; i++) {
+
+            var li = document.createElement("li");
+            li.innerHTML = data[i].latitude + " , " + data[i].longitude;
+            list.appendChild(li);
+        }
+    }
+}
+
+// Load history on page load
+showHistory();
+
+</script>
+
+</body>
+</html>
